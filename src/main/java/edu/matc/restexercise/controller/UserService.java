@@ -8,63 +8,37 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @Path("/user")
 public class UserService {
+
     @GET
-    @Produces({"text/plain,application/json,text/html"})
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/{userId}")
-    public Response getMessage(@PathParam("userId") String userId) {
+    public Response getMessage(@PathParam("userId") String userId) throws Exception{
 
         UserDao dao = new UserDao();
-        StringBuilder output =new StringBuilder();
-
-        if (userId == null || userId.equals("")) {
-            List<User> users = dao.getAllUsers();
-            buildAllUsersOutput(output,users);
-        } else {
-            User user = dao.getUser(userId);
-            List<User> users = new ArrayList<User>();
-            users.add(user);
-            buildAllUsersOutput(output,users);
-        }
-
-        return Response.status(200).entity(output.toString()).build();
+        User user = dao.getUser(userId);
+        ObjectMapper mapper = new ObjectMapper();
+        String output = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(user);
+        return Response.status(200).entity(output).build();
     }
 
-    private void buildAllUsersOutput(StringBuilder output,List<User> users) {
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMessage() throws Exception {
 
-        int counter = 1;
-        for (User current: users) {
-            output.append("User #: " + counter);
-            buildUserOutput(output,current);
-            buildUserRoleOutput(output,current);
-            counter+= 1;
-            output.append("");
-        }
+        UserDao dao = new UserDao();
+        List<User> users = dao.getAllUsers();
+        ObjectMapper mapper = new ObjectMapper();
+        String output = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(users);
+        return Response.status(200).entity(output).build();
     }
-
-    private void buildUserOutput(StringBuilder output, User user) {
-        output.append("User Name: " + user.getUserName());
-        output.append("First Name: " + user.getFirstName());
-        output.append("Last Name: " + user.getLastName());
-        output.append("Email Address: " + user.getEmailAddress());
-    }
-
-    private void buildUserRoleOutput(StringBuilder output, User user) {
-        Set<UserRole> roles = user.getUserRoles();
-        int counter = 1;
-        for (UserRole role: roles) {
-            output.append("Role #: " + role.getRoleName());
-            counter+= 1;
-        }
-    }
-
-
-
 }

@@ -1,5 +1,6 @@
 package edu.matc.restexercise.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -38,6 +39,7 @@ public class User implements java.io.Serializable {
 
     @OneToMany(mappedBy = "user")
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+    @JsonManagedReference
     private Set<UserRole> roles = new HashSet<UserRole>(0);
 
     /**
@@ -161,10 +163,10 @@ public class User implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "User{" +
+        return ("userName='" + userName + '\'' +
                 "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
+                "laststName='" + lastName + '\'' +
+                "emailAddress='" + emailAddress + '\'');
     }
 
 }

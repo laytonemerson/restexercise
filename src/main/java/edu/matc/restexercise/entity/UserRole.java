@@ -1,5 +1,7 @@
 package edu.matc.restexercise.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 /**
@@ -21,6 +23,7 @@ public class UserRole implements java.io.Serializable {
     @Id
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_name", referencedColumnName = "user_name", nullable = false)
+    @JsonBackReference
     private User user;
 
     /**
