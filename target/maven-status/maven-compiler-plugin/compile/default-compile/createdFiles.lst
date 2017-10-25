@@ -1,0 +1,6 @@
+edu/matc/restexercise/entity/User.class
+edu/matc/restexercise/entity/UserRole.class
+edu/matc/restexercise/persistence/UserDao.class
+edu/matc/restexercise/controller/ExerciseApplication.class
+edu/matc/restexercise/persistence/SessionFactoryProvider.class
+edu/matc/restexercise/controller/UserService.class

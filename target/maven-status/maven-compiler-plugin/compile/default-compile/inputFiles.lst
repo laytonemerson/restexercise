@@ -1,0 +1,6 @@
+/home/student/IntelliJ/restexercise/src/main/java/edu/matc/restexercise/controller/UserService.java
+/home/student/IntelliJ/restexercise/src/main/java/edu/matc/restexercise/entity/User.java
+/home/student/IntelliJ/restexercise/src/main/java/edu/matc/restexercise/controller/ExerciseApplication.java
+/home/student/IntelliJ/restexercise/src/main/java/edu/matc/restexercise/persistence/SessionFactoryProvider.java
+/home/student/IntelliJ/restexercise/src/main/java/edu/matc/restexercise/persistence/UserDao.java
+/home/student/IntelliJ/restexercise/src/main/java/edu/matc/restexercise/entity/UserRole.java
