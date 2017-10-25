@@ -16,7 +16,7 @@ import java.util.Set;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
-@Path("/user")
+@Path("/users")
 public class UserService {
 
     @GET
